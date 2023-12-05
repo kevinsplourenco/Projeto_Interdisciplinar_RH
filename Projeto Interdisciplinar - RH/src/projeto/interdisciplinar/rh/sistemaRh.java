@@ -8,16 +8,10 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.MaskFormatter;
-import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -26,7 +20,6 @@ import javax.swing.table.DefaultTableModel;
  */
 
 public class sistemaRh extends javax.swing.JFrame {
-
     MaskFormatter nscData;
     MaskFormatter nmrTelefone;
     
@@ -45,86 +38,6 @@ public class sistemaRh extends javax.swing.JFrame {
         }
         initComponents();
     }
-    
-    public class ConexaoBD {
-    private static final String URL = "jdbc:mysql://localhost:3306/dados_rh?user=root&password=lowshutdown\"";
-    private static final String USUARIO = "root";
-    private static final String SENHA = "lowshutdown";
-
-    public static Connection obterConexao() {
-        Connection conexao = null;
-        try {
-            conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
-            System.out.println("Conexão estabelecida com sucesso!");
-        } catch (SQLException e) {
-            System.out.println("Erro ao conectar ao banco de dados:");
-            e.printStackTrace();
-        }
-        return conexao;
-    }
-}
-    public class TelaExibicaoDados extends javax.swing.JFrame {
-
-    public TelaExibicaoDados() {
-        initComponents();
-        exibirDados();
-    }
-
-    private void exibirDados() {
-        try {
-            Connection conexao = ConexaoBD.obterConexao();
-            PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM dados_formulario");
-            ResultSet rs = pstmt.executeQuery();
-
-            DefaultTableModel model = new DefaultTableModel();
-            JTable table = new JTable(model);
-            model.addColumn("Nome");
-            model.addColumn("Sobrenome");
-            model.addColumn("Data de Nascimento");
-            model.addColumn("Sexo");
-            model.addColumn("Telefone");
-            model.addColumn("Email");
-            model.addColumn("Cidade");
-            model.addColumn("Bairro");
-            model.addColumn("Rua");
-            model.addColumn("Número");
-            model.addColumn("CEP");
-            model.addColumn("Departamento");
-            model.addColumn("Cargo");
-
-            while (rs.next()) {
-                Object[] row = {
-                    rs.getString("nome"),
-                    rs.getString("sobrenome"),
-                    rs.getString("nsc_data"),
-                    rs.getString("sexo"),
-                    rs.getString("nmr_telefone"),
-                    rs.getString("email"),
-                    rs.getString("cidade"),
-                    rs.getString("bairro"),
-                    rs.getString("rua"),
-                    rs.getInt("numero_casa"),
-                    rs.getString("cep"),
-                    rs.getString("departamento"),
-                    rs.getString("cargo")
-                };
-                model.addRow(row);
-            }
-
-            rs.close();
-            pstmt.close();
-            conexao.close();
-
-            JScrollPane scrollPane = new JScrollPane(table);
-            this.add(scrollPane);
-            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            this.pack();
-            this.setVisible(true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
 
 
     /**
@@ -337,7 +250,7 @@ public class sistemaRh extends javax.swing.JFrame {
                                     .addComponent(departamento, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(63, 63, 63)
+                                        .addGap(49, 49, 49)
                                         .addComponent(jButton1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,16 +259,16 @@ public class sistemaRh extends javax.swing.JFrame {
                                     .addComponent(exibirDados))))
                         .addGap(28, 28, 28))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addGap(119, 119, 119)
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
